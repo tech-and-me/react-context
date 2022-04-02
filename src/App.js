@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import One from "./components/One";
+import Two from "./components/Two";
+import Three from "./components/Three";
+import {useState} from 'react';
+import {CounterContext} from './CounterContext'
+import {NumberContext} from './NumberContext'
+
 
 function App() {
+  const [counter, setCounter] = useState(0);
+  const [number,setNumber] = useState(10);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className= "App">
+      <h1>App Component</h1>
+      <p>Current Couunter Value is : {counter}</p>
+      <button onClick = {() => setCounter (counter+1)}>Increment</button>
+      <button onClick = {() => setCounter (counter-1)}>Decrement</button>
+      <p>Current value of Number is : {number}</p>
+      <hr />
+      <CounterContext.Provider value={{counter,setCounter}}>
+        <One/>
+        <Two/>
+      </CounterContext.Provider>
+      <NumberContext.Provider value={{number,setNumber}}>
+        <Three/>
+      </NumberContext.Provider>
     </div>
   );
 }
